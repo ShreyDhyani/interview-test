@@ -6,12 +6,20 @@ type DeleteConfirmModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   itemName?: string;
+  title?: string;
+  description?: string;
+  cancelText?: string;
+  confirmText?: string;
 };
 
 export function DeleteConfirmModal({
   open,
   onOpenChange,
   itemName,
+  title = "Are you sure you want to delete?",
+  description = "This will permanently delete the todo item.",
+  cancelText = "Cancel",
+  confirmText = "Delete",
 }: DeleteConfirmModalProps) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -43,10 +51,10 @@ export function DeleteConfirmModal({
             <Dialog.Title
               style={{ fontSize: "1.3rem", marginBottom: "8px", color: "#111827" }}
             >
-              Are you sure you want to delete?
+              {title}
             </Dialog.Title>
             <Dialog.Description style={{ color: "#4b5563", lineHeight: 1.5 }}>
-              This will permanently delete the todo item.
+              {description}
               {itemName ? (
                 <>
                   <br />
@@ -79,7 +87,7 @@ export function DeleteConfirmModal({
                   color: "#111827",
                 }}
               >
-                Cancel
+                {cancelText}
               </button>
             </Dialog.Close>
             <button
@@ -94,7 +102,7 @@ export function DeleteConfirmModal({
                 color: "#ffffff",
               }}
             >
-              Delete
+              {confirmText}
             </button>
           </div>
         </Dialog.Content>
