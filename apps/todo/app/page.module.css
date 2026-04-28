@@ -58,12 +58,32 @@
   border: 1px solid #e5e7eb;
   border-radius: 10px;
   padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .item label {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.deleteButton {
+  border: 0;
+  background: transparent;
+  color: #9ca3af;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteButton:hover {
+  background: #f3f4f6;
+  color: #dc2626;
 }
 
 .done {

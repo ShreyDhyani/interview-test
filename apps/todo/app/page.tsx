@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { DeleteConfirmModal } from "@repo/ui/delete-confirm-modal";
+import { Trash2 } from "lucide-react";
 import styles from "./page.module.css";
 
 const sampleTodos = [
@@ -7,6 +12,14 @@ const sampleTodos = [
 ];
 
 export default function Home() {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedTodoTitle, setSelectedTodoTitle] = useState("");
+
+  const openDeleteModal = (todoTitle: string) => {
+    setSelectedTodoTitle(todoTitle);
+    setIsDeleteModalOpen(true);
+  };
+
   return (
     <main className={styles.page}>
       <section className={styles.card}>
@@ -31,10 +44,24 @@ export default function Home() {
                 <input type="checkbox" checked={todo.done} readOnly />
                 <span className={todo.done ? styles.done : ""}>{todo.title}</span>
               </label>
+              <button
+                type="button"
+                className={styles.deleteButton}
+                aria-label={`Delete ${todo.title}`}
+                onClick={() => openDeleteModal(todo.title)}
+              >
+                <Trash2 size={16} aria-hidden />
+              </button>
             </li>
           ))}
         </ul>
       </section>
+
+      <DeleteConfirmModal
+        open={isDeleteModalOpen}
+        onOpenChange={setIsDeleteModalOpen}
+        itemName={selectedTodoTitle}
+      />
     </main>
   );
 }
